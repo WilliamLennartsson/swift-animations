@@ -16,6 +16,11 @@ class ViewController: UIViewController {
         return view
     }()
     
+    let profileTitle: UILabel = {
+        let label = UILabel(frame: .zero)
+        return label
+    }()
+    
     let profileText: UITextView = {
         let text = UITextView(frame: .zero)
         return text
@@ -47,6 +52,12 @@ class ViewController: UIViewController {
         profileImageView.frame = CGRect(x: 50, y: 80, width: screenW - 100, height: 150)
         profileImageView.alpha = 0
         view.addSubview(profileImageView)
+        
+        profileTitle.frame = CGRect(x: -1000, y: screenH / 2 - 50, width: screenW, height: 50)
+        profileTitle.text = "Hedda Hogolas"
+        profileTitle.textAlignment = .center
+        profileTitle.alpha = 0
+        view.addSubview(profileTitle)
     }
     
     var isToggled = false
@@ -68,6 +79,8 @@ class ViewController: UIViewController {
             })
             UIView.animate(withDuration: 1, animations: {
                 self.headerView.transform = CGAffineTransform(scaleX: 2, y: 6)
+                self.profileTitle.transform = CGAffineTransform(translationX: 1000, y: 0)
+                self.profileTitle.alpha = 1
             })
         }
     }
@@ -75,12 +88,13 @@ class ViewController: UIViewController {
     func hideProfile(){
         UIImageView.animate(withDuration: 2, animations: {
             self.profileImageView.alpha = 0
+            self.profileTitle.transform = CGAffineTransform(translationX: -1000, y: 0)
+            self.profileTitle.alpha = 1
         }) { (finished) in
             UIView.animate(withDuration: 2, animations: {
                 self.headerView.transform = CGAffineTransform(scaleX: 1, y: 1)
             })
         }
-        
     }
 
 }
